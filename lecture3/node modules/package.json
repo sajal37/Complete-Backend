@@ -1,0 +1,25 @@
+{
+  "name": "@cuiet.sajal/myfirstpackage",
+  "version": "1.0.3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Complete Backend"
+  },
+  "author": "sajal",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "hbs": "^4.2.0"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "keywords": [],
+  "description": ""
+}
