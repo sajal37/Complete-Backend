@@ -9,7 +9,7 @@ setImmediate(() => {
 });
 
 function someTask() {
-  return new Promis((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     resolve("promise");
   });
 }
