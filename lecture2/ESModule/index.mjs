@@ -13,5 +13,5 @@ function div(a, b) {
   }
   return a / b;
 }
-export default mul; //defualt export
+export default mul; //default export
 export { add, sub, div }; //named exports to be used with the same name in the import statement
