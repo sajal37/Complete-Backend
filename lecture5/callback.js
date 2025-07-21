@@ -34,7 +34,7 @@ function buyProduct(product_name) {
   });
 }
 
-function decuctAmount(amount) {
+function deductAmount(amount) {
   return new Promise((resolve, reject) => {
     if (account_balance < amount) {
       return reject("insufficient balance");
@@ -43,11 +43,10 @@ function decuctAmount(amount) {
     return resolve("product purchase successfully");
   });
 }
-uuz;
 
 buyProduct("Iphone 15")
   .then((data) => {
-    return decuctAmount(data);
+    return deductAmount(data);
   })
   .then((message) => {
     console.log(message);
