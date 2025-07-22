@@ -31,7 +31,7 @@ app.get("/blogs", (req, res) => {
   res.send("got it");
 });
 
-app.listen(3033, () => {
+app.listen(3000, () => {
   //this callback function will run when the server starts
   console.log("server started");
 });
