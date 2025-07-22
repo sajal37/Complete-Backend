@@ -7,7 +7,7 @@ app.use(express.json());
 app.post("/users", (req, res) => {
   const newUser = {
     name: req.body.name,
-    rollno: req.body.rollno,
+    rollno: req.body.rollno
   };
 
   fs.readFile("data.json", "utf8", (err, data) => {
