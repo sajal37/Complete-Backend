@@ -28,23 +28,22 @@ app.post("/", (req, res) => {
     if (err) {
       console.log(err);
     }
-      let users;
-      if (data) {
-        users = JSON.parse(data);
-      } else {
-        users = [];
-      }
-      users.push(newUser);
-      fs.writeFile("data.json", JSON.stringify(users, null, 2), (err) => {
-        if (err) {
-          console.log(err);
-        } else {
-            res.send("Login successful");
-        }
-      });
+    let users;
+    if (data) {
+      users = JSON.parse(data);
+    } else {
+      users = [];
     }
-  );
-  console.log("Login Details: " + JSON.stringify(newUser));
+    users.push(newUser);
+    fs.writeFile("data.json", JSON.stringify(users, null, 2), (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Login Details: " + JSON.stringify(newUser));
+        res.send("Login successful");
+      }
+    });
+  });
 });
 
 app.listen(3000, () => {
