@@ -1,5 +1,7 @@
 const express = require("express");
 const fs = require("fs");
+const mysql = require("mysql2");
+const path = require("path");
 const app = express();
 
 app.use(express.json());
@@ -17,11 +19,33 @@ app.get("/", (req, res) => {
   );
 });
 
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "Motleyfurl#12",
+  database: "loginDB",
+});
+
+db.connect((err) => {
+  if (err) {
+    console.log("MySQL connection error:", err);
+  } else {
+    console.log("Connected to MySQL!");
+  }
+});
+
 app.post("/", (req, res) => {
   const newUser = {
     email: req.body.email,
     password: req.body.password,
   };
+  
+  const sql = "INSERT INTO users (email, password) VALUES (?, ?)";
+  db.query(sql, [newUser.email, newUser.password], (err, result) => {
+    if (err) {
+      console.log("MySQL Insert Error:", err);
+      return res.status(500).send("Database error");
+    }
 
   fs.readFile("data.json", "utf8", (err, data) => {
     if (err) {
@@ -41,6 +65,7 @@ app.post("/", (req, res) => {
         console.log("Login Details: " + JSON.stringify(newUser));
         res.send("Login successful");
       }
+      })
     });
   });
 });
