@@ -1,18 +1,31 @@
-const express=require("express");
-const app=express();
-app.use(express.static(__dirname+"/public"));
+const express = require("express");
+const app = express();
+
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
+
 app.post("/user", (req, res) => {
-    try {
-        const { email, password } = req.body;
-    console.log("User added:", { email, password });
-    res.status(201).json({ message: "User added successfully" });
-} catch (error) {
-    console.error("Error adding user:", error);
-    res.status(500).json({ message: "Internal server error" });
-}
+  const { email, password } = req.body;
+
+  console.log(email, password);
+  try {
+    res.json({
+      success: true,
+      message: "user added successfully",
+      data: {
+        email: email,
+        password: password,
+      },
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
 });
+
 app.listen(3000, () => {
-    console.log("Server is running on port 3000");
+  console.log("Server is running on port 3000");
 });
