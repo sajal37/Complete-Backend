@@ -1,14 +1,33 @@
 function m1(req, res, next) {
-    console.log("running middleware 1");
-    req.user={
-        id:1,
-        username:"Nitesh"
-    }
+  console.log("running middleware 1");
+  req.user = {
+    id: 1,
+    name: "sajal",
+  };
+  next();
 }
-function m2(req, res) {
-    console.log("running middleware 2");
-    console.log(req.user);
-    req.isAdmin=true;
+
+function m2(req, res, next) {
+  console.log("runnning middleware 2");
+  console.log(req.user);
+  next();
 }
-module.exports.m1=m1;
-module.exports.m2=m2;
+
+function checkAdmin(req, res, next) {
+  console.log("running chekAdmin middleware");
+
+  let { name } = req.query;
+  if (name == "sajal") {
+    req.isAdmin = true;
+    return next();
+  }
+
+  return res.json({
+    success: false,
+    message: "you are not an admin",
+  });
+}
+
+module.exports.m1 = m1;
+module.exports.m2 = m2;
+module.exports.checkAdmin = checkAdmin;

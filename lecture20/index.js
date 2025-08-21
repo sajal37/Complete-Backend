@@ -1,18 +1,32 @@
-const express=require('express');
-const {m1,m2}=require('./middleware/middleware');
-const app=express();
-app.use(express.static(__dirname+'/public'));
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
-app.use(m1);
-app.use(m2);
-app.get("/home",(req,res)=>{
-    res.json({
-        success:true,
-        message:"Welcome to the Home Page"
-    })
-});
+const express = require("express");
+const { m1, m2, checkAdmin } = require("./middleware/middleware.js");
+const app = express();
 
-app.listen(5534,()=>{
-    console.log("Server is running on port 5534");
+const PORT = 3069;
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname + "/public"));
+
+app.use(m1);
+
+app.get("/home", (req, res, next) => {
+  console.log("running controller home");
+  res.json({
+    succes: true,
+    message: "welcome to the home page",
+  });
+  next();
+});
+app.use(m2);
+
+app.get("/dashboard", checkAdmin, (req, res) => {
+  if (req.isAdmin) {
+    return res.json({
+      success: true,
+      message: "welcome to the dashboard",
+    });
+  }
+});
+app.listen(5534, () => {
+  console.log("server is running on port 5534");
 });
