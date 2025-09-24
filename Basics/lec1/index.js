@@ -25,32 +25,35 @@ app.post("/done", async (req, res) => {
   const { email, password } = req.body;
   await userModel.create({
     email: email,
-    password: password
+    password: password,
   });
   res.send("Form Submitted");
 });
 
 app.get("/users", (req, res) => {
-  userModel.find().then((users) =>{
+  userModel.find().then((users) => {
     res.send(users);
-  })
-})
+  });
+});
 
 app.get("/update", async (req, res) => {
-  await userModel.findOneAndUpdate({ 
-    password: "2437"
-  }, {
-    password: "2438"
-  });
+  await userModel.findOneAndUpdate(
+    {
+      password: "2437",
+    },
+    {
+      password: "2438",
+    }
+  );
   res.send("User updated");
 });
 
-app.get("/delete", async (req,res) => {
+app.get("/delete", async (req, res) => {
   await userModel.findOneAndDelete({
-    password: "chitkara"
+    password: "chitkara",
   });
   res.send("User deleted");
-})
+});
 
 app.listen(3000, (req, res) => {
   console.log("Server is running on port 3000");
