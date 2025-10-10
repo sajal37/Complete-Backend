@@ -12,4 +12,4 @@ wss.on("connection", function(socket){
         let parsedMessage=JSON.parse(message);
         if(parsedMessage.type==="join"){
     }})
-});j
+});
