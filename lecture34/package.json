@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "bullmq": "^5.62.0",
+    "express": "^5.1.0"
+  }
+}
